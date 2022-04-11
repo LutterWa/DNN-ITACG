@@ -287,7 +287,7 @@ if __name__ == '__main__':
             P = miss.R / miss.v + float(resnet.predict(x, use_multiprocessing=True))
             D = miss.td - miss.Y[0]
             E = D - P
-            ab = 3 * miss.v * 1e-2 * E
+            ab = 3 * miss.v ** 2 / miss.R / (4 * (miss.theta - miss.q) + miss.q - miss.ad) * max(E, 0)
             done = miss.step(0.01, ab=ab)  # 单步运行
 
             list_tgo.append([D, P])
